@@ -1,0 +1,104 @@
+<?xml version = "1.0"?>
+<openerp>
+    <data>
+<act_window id = "action_minutes_task" name ="Minutes Task" res_model= "meeting.information" view_mode ="tree,form"/>
+<menuitem id= "menu_minutes_task" name = "Meeting Minutes" parent= "mail.mail_feeds" sequence = "20" action = "action_minutes_task"/>
+
+   <record id="view_form_meeting_minutes" model="ir.ui.view">
+		<field	name="name">Meeting Minutes Form</field>
+		<field	name="model">meeting.information</field>
+		<field	name="arch" type="xml">
+<header>
+<button string="Create" type="object" name="concept_progressbar" attrs="{'invisible': [('state', '=', 'create')]}"/>
+			<!--The oe_highlight class gives the button a red color when it is saved.
+			It is usually used to indicate the expected behaviour. -->
+<button string="Meeting" type="object" name="progress_progressbar" attrs="{'invisible': [('state','=','meeting')]}"/>
+<button string="Report Minutes" type="object" name="done_progressbar" attrs="{'invisible': [('state','=','minutes')]}"/>
+	    <field name="state" widget="statusbar"/>
+	</header>
+				<form string="Meeting Minutes">
+					<sheet>
+				<group name="group_top">
+						<group name="group_left">
+							<field name="meet_type"/>
+							<field name="meeting_purpose"/>
+							<field name="meeting_date"/>
+
+<field name= "agenda_ids" nolabel = "1" colspan = "4" mode= "tree">
+ <tree string="agenda tree">
+<field name = 'id'/>
+                        <field name='agenda_name'/>
+                        <field name='remarks'/>
+                        <field name='agenda_owner'/>							
+                    </tree>
+</field>    
+						</group>
+						<group name="group_right">
+					<field name= "venue_fk"/>
+							<field name= "meeting_moderator"/>
+
+					
+			
+
+<field name= "participant_ids" nolabel = "1" colspan = "4" mode= "tree">
+ <tree string="participant tree">
+			<field name = 'id'/>
+                        <field name='participant_name'/>
+                        <field name='email_id'/>
+                        <field name='department'/>							
+                    </tree>
+</field>
+						</group>
+				</group>
+		</sheet>
+					
+				</form>
+
+   <notebook position="inside" >
+<page string="Attendance">
+<field name= "attendance_id" nolabel = "1" colspan = "4" mode= "tree">
+ <tree string="attendance tree">
+                        <field name='attendance_id'/>
+                        <field name='attendance'/>							
+                    </tree>
+</field>    
+</page>
+					    <page string="Discussion">
+						<field name= "discussion_id1" nolabel = "1" colspan = "4" mode= "tree">
+ <tree string="discussion tree">
+                        <field name='discussion_id1'/>
+                        <field name='discussion_content'/>							
+                    </tree>
+</field>    
+   
+
+					    </page>
+					    <page string="Decision">
+			<field name= "decision_id" nolabel = "1" colspan = "4" mode= "tree">
+ <tree string="decision tree">
+                        <field name='agenda_id'/>
+                        <field name='decision_name'/>
+                        <field name='decision_remarks'/>							
+                    </tree>
+</field>    
+					</page>
+					 </notebook>  
+		</field>   
+</record>
+
+<record id="view_tree_todo_task" model="ir.ui.view">
+<field name="name">Meeting Minutes Tree</field>
+<field name="model">meeting.information</field>
+<field name="arch" type="xml">
+<tree>
+<field name="meeting_purpose"/>
+<field name="meet_type"/>
+<field name="meeting_date"/>
+<field name="meeting_moderator"/>
+</tree>
+</field>
+</record>
+
+
+</data>
+</openerp>

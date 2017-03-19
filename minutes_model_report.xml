@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+<report id="report_minutes_model_action" string = "Meeting Invitation with Agenda" model="meeting.information" report_type="qweb-pdf" name="minutes_model.report_minutes_model_template"/>
+<template id="report_minutes_model_template">
+<t t-call="report.html_container">
+<t t-call="report.external_layout">
+<div class="page">
+<!-- Report page content -->
+<div> 	
+</div>
+<div style="margin-left:430px;"><u><b>Call for Meeting</b></u></div>
+<div>
+Dear Sir,Madam
+</div>
+<div>
+<p style= " text-align: justify;">
+<t t-foreach="docs" t-as="p">
+I would like to invite you to join the meeting on <span t-field="p.meet_type"/> for the purpose of <span t-field="p.meeting_purpose"/>. Meeting will be held in the date of <span t-field="p.meeting_date"/>  at the venue <span t-field="p.venue_fk.venue_name"/>, <span t-field="p.venue_fk.venue_address"/>. The meeting will be moderated by  <span t-field="p.meeting_moderator"/>.
+</t>
+</p>
+</div>
+<br/>
+<u><b>Invitees:</b></u>
+
+<table width="100%" border="2" cellspacing="0" cellpadding="0">
+<tr><th style="margin-left:30px;">Participant</th><th style="margin-left:30px;">Email</th><th style="margin-left:30px;">Department</th>
+<th style="margin-left:30px;">Phone</th>
+</tr>
+<t t-foreach="docs.participant_ids" t-as="o">
+<tr>
+<td>
+<span t-field="o.participant_name"/>
+</td>
+
+<td>
+<span t-field="o.email_id"/>
+</td>
+
+<td>
+<span t-field="o.department"/>
+</td>
+
+<td>
+<span t-field="o.phone_number"/>
+</td>
+</tr>
+</t>
+</table>
+
+
+<br/><br/>
+<u><b>Agendas to be discussed:</b></u>
+<table width="100%" border="2" cellspacing="0" cellpadding="0">
+<tr><th>Agenda</th><th>Owner</th><th>Remarks</th></tr>
+<t t-foreach="docs.agenda_ids" t-as="o">
+<tr>
+
+<td>
+<span t-field="o.agenda_name"/>
+</td>
+
+<td>
+<span t-field="o.agenda_owner"/>
+</td>
+
+<td>
+<span t-field="o.remarks"/>
+</td>
+</tr>
+</t>
+</table>
+
+
+<br/><br/><br/><br/><br/>
+
+
+<br/><br/><br/><br/><br/>
+<div style = "float: right;">
+Thank You,<br/>
+BI Solutions
+</div>
+</div>
+</t>
+</t>
+</template>
+</data>
+</openerp>
